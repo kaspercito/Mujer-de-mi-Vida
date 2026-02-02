@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Un Regalo para Ti, Belu 💜</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a001a 70%);
+            color: #f0e6ff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .container {
+            background: rgba(30, 0, 30, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid #7b2cbf;
+            box-shadow: 0 15px 35px rgba(123, 44, 191, 0.4), 
+                        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            width: 100%;
+            max-width: 800px;
+            overflow: hidden;
+            position: relative;
+        }
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #9d4edd, #3a0ca3, #9d4edd);
+        }
+        header {
+            text-align: center;
+            padding: 40px 30px 20px;
+            background: linear-gradient(180deg, rgba(61, 0, 92, 0.7) 0%, transparent 100%);
+        }
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            background: linear-gradient(90deg, #e0aaff, #c77dff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 10px rgba(192, 132, 252, 0.3);
+        }
+        .subtitle {
+            font-size: 1.2rem;
+            color: #d8b4fe;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+        .heart {
+            color: #ff6bcb;
+            animation: pulse 2s infinite;
+            margin: 0 5px;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        .main-content {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 30px;
+            gap: 30px;
+        }
+        .message-section {
+            flex: 1;
+            min-width: 300px;
+        }
+        .message-box {
+            background: rgba(20, 0, 30, 0.9);
+            border-radius: 15px;
+            padding: 30px;
+            border-left: 5px solid #9d4edd;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            margin-bottom: 30px;
+        }
+        h2 {
+            color: #c77dff;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        h2 i {
+            color: #ff6bcb;
+        }
+        .message-text {
+            line-height: 1.7;
+            font-size: 1.1rem;
+            color: #f3e9ff;
+        }
+        .highlight {
+            color: #e0aaff;
+            font-weight: bold;
+        }
+        .gift-section {
+            flex: 1;
+            min-width: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .gift-card {
+            background: linear-gradient(145deg, #240046, #3c096c);
+            border-radius: 15px;
+            padding: 35px 25px;
+            text-align: center;
+            width: 100%;
+            border: 2px dashed #9d4edd;
+            box-shadow: 0 10px 25px rgba(157, 78, 221, 0.3);
+            margin-bottom: 30px;
+        }
+        .gift-icon {
+            font-size: 4rem;
+            color: #ff6bcb;
+            margin-bottom: 20px;
+        }
+        .code-display {
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 25px 0;
+            border: 1px solid #5a189a;
+            font-family: 'Courier New', monospace;
+            font-size: 1.4rem;
+            letter-spacing: 2px;
+            color: #80ffdb;
+            word-break: break-all;
+            position: relative;
+            transition: all 0.3s;
+        }
+        .code-display:hover {
+            border-color: #c77dff;
+            box-shadow: 0 0 15px rgba(199, 125, 255, 0.5);
+        }
+        .copy-btn {
+            background: linear-gradient(90deg, #9d4edd, #7b2cbf);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .copy-btn:hover {
+            background: linear-gradient(90deg, #c77dff, #9d4edd);
+            transform: translateY(-3px);
+            box-shadow: 0 7px 15px rgba(157, 78, 221, 0.4);
+        }
+        .redeem-instructions {
+            background: rgba(58, 12, 163, 0.15);
+            border-radius: 12px;
+            padding: 25px;
+            width: 100%;
+            border: 1px solid rgba(123, 44, 191, 0.5);
+        }
+        .steps {
+            list-style: none;
+            counter-reset: step-counter;
+        }
+        .steps li {
+            counter-increment: step-counter;
+            margin-bottom: 20px;
+            padding-left: 45px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .steps li:before {
+            content: counter(step-counter);
+            background: #7b2cbf;
+            color: white;
+            font-weight: bold;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        .redeem-btn {
+            display: inline-block;
+            width: 100%;
+            background: linear-gradient(90deg, #ff6bcb, #ff8fab);
+            color: white;
+            text-decoration: none;
+            padding: 18px;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            text-align: center;
+            margin-top: 20px;
+            transition: all 0.3s;
+            box-shadow: 0 6px 20px rgba(255, 107, 203, 0.3);
+        }
+        .redeem-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255, 107, 203, 0.5);
+            background: linear-gradient(90deg, #ff8fab, #ff6bcb);
+        }
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: #d8b4fe;
+            font-size: 0.95rem;
+            border-top: 1px solid rgba(123, 44, 191, 0.4);
+            background: rgba(10, 0, 15, 0.7);
+        }
+        .signature {
+            color: #e0aaff;
+            font-style: italic;
+            margin-top: 10px;
+        }
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+                padding: 20px;
+            }
+            h1 {
+                font-size: 2.2rem;
+            }
+            .code-display {
+                font-size: 1.2rem;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Para Belencita <span class="heart">💜</span></h1>
+            <p class="subtitle">Un pequeño detalle para alguien que ilumina los juegos (y más allá) con su energía y amistad.</p>
+        </header>
+        
+        <div class="main-content">
+            <section class="message-section">
+                <div class="message-box">
+                    <h2><i class="fas fa-star"></i> Un Mensaje para Vos</h2>
+                    <div class="message-text">
+                        <p>Hola Belu,</p>
+                        <p>Sé que dijiste que no estás lista para una relación, y respeto eso completamente. Esta no es una de esas cosas. Es solo un regalo de amistad, un <span class="highlight">"gracias"</span> por ser alguien tan especial con quien compartir partidas, charlas y buenos momentos.</p>
+                        <p>Conocerte, aunque sea a través de la pantalla, ha sido un verdadero gusto. Sos divertida, tenés esa actitud argentina que da vida a todo y, aunque a veces no quieras compartir pantalla, jugar contigo es siempre un planazo.</p>
+                        <p>Este código es para que elijas algo que te guste en la tienda de Riot. Espero que te traiga una sonrisa, igual que las que vos has traído.</p>
+                        <p>Sin presiones, sin expectativas ocultas. Solo un regalo de un amigo.</p>
+                    </div>
+                </div>
+                
+                <div class="message-box">
+                    <h2><i class="fas fa-heart"></i> Lo que Valoro de Nuestra Amistad</h2>
+                    <div class="message-text">
+                        <p><span class="highlight">✨ Tu sinceridad:</span> Que siempre decís las cosas claras, como ahora.</p>
+                        <p><span class="highlight">🎮 Las risas en Valorant:</span> Esos clutches, los "¡qué hiciste!" y los GGs bien merecidos.</p>
+                        <p><span class="highlight">💬 Las conversaciones:</span> Que van más allá del juego y me hacen conocer un poco de tu mundo.</p>
+                        <p><span class="highlight">🇦🇷🇪🇨 La conexión:</span> Que la distancia no sea más que un número en el ping.</p>
+                        <p>Sea lo que sea que elijas con el código, espero que te guste. ¡Te lo merecés!</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="gift-section">
+                <div class="gift-card">
+                    <div class="gift-icon">
+                        <i class="fas fa-gift"></i>
+                    </div>
+                    <h2>Tu Código de Regalo</h2>
+                    <p>Este código es válido para canjear en la tienda oficial de Riot Games.</p>
+                    
+                    <div class="code-display" id="riotCode">
+                        CC-XQG61-AT89Q-2Z1GD
+                    </div>
+                    
+                    <button class="copy-btn" onclick="copyCode()">
+                        <i class="far fa-copy"></i> Copiar Código
+                    </button>
+                    
+                    <p style="margin-top: 15px; font-size: 0.9rem; color: #d8b4fe;">
+                        <i class="fas fa-info-circle"></i> Haz clic en el botón de abajo para ir directamente a la página de canje.
+                    </p>
+                </div>
+                
+                <div class="redeem-instructions">
+                    <h2><i class="fas fa-laptop-code"></i> Cómo Canjearlo</h2>
+                    <ol class="steps">
+                        <li>Asegúrate de haber iniciado sesión en tu cuenta de Riot Games.</li>
+                        <li>Haz clic en el gran botón morado de abajo. Te llevará a la página oficial de canje.</li>
+                        <li>Pega el código <strong>CC-XQG61-AT89Q-2Z1GD</strong> en el campo correspondiente.</li>
+                        <li>¡Confirma y listo! El contenido se añadirá a tu cuenta.</li>
+                    </ol>
+                    
+                    <a href="https://shop.riotgames.com/en-us/redeem" target="_blank" class="redeem-btn">
+                        <i class="fas fa-external-link-alt"></i> Canjear en Riot Games Store
+                    </a>
+                </div>
+            </section>
+        </div>
+        
+        <footer>
+            <p>Este regalo es un gesto de aprecio sincero. No tiene fecha de caducidad ni condiciones.</p>
+            <p class="signature">Con cariño, tu amigo desde Ecuador. 🧉</p>
+        </footer>
+    </div>
+
+    <script>
+        function copyCode() {
+            const codeText = "CC-XQG61-AT89Q-2Z1GD";
+            navigator.clipboard.writeText(codeText).then(() => {
+                const button = event.currentTarget;
+                const originalHTML = button.innerHTML;
+                button.innerHTML = '<i class="fas fa-check"></i> ¡Código Copiado!';
+                button.style.background = 'linear-gradient(90deg, #80ffdb, #4ea8de)';
+                
+                setTimeout(() => {
+                    button.innerHTML = originalHTML;
+                    button.style.background = '';
+                }, 2000);
+            }).catch(err => {
+                alert("No se pudo copiar el código. Puedes seleccionarlo y copiarlo manualmente.");
+            });
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const heart = document.querySelector('.heart');
+            setInterval(() => {
+                heart.style.animation = 'none';
+                setTimeout(() => heart.style.animation = 'pulse 2s infinite', 10);
+            }, 4000);
+        });
+    </script>
+</body>
+</html>
