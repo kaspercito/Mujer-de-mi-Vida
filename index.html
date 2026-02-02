@@ -348,21 +348,102 @@
 
     <script>
         function copyCode() {
-            const codeText = "CC-XQG61-AT89Q-2Z1GD";
+        const codeText = "CC-XQG61-AT89Q-2Z1GD";
+        
+        // Método 1: Usando navigator.clipboard (funciona en HTTPS/localhost)
+        if (navigator.clipboard && window.isSecureContext) {
             navigator.clipboard.writeText(codeText).then(() => {
-                const button = event.currentTarget;
-                const originalHTML = button.innerHTML;
-                button.innerHTML = '<i class="fas fa-check"></i> ¡Código Copiado!';
-                button.style.background = 'linear-gradient(90deg, #80ffdb, #4ea8de)';
-                
-                setTimeout(() => {
-                    button.innerHTML = originalHTML;
-                    button.style.background = '';
-                }, 2000);
-            }).catch(err => {
-                alert("No se pudo copiar el código. Puedes seleccionarlo y copiarlo manualmente.");
+                showCopySuccess();
+            }).catch(() => {
+                // Si falla, usa el método alternativo
+                fallbackCopyMethod(codeText);
+            });
+        } else {
+            // Método 2: Método antiguo pero funcional
+            fallbackCopyMethod(codeText);
+        }
+    }
+    
+    function fallbackCopyMethod(text) {
+        // Crear un elemento temporal de texto
+        const textArea = document.createElement("textarea");
+        textArea.value = text;
+        textArea.style.position = "fixed";
+        textArea.style.left = "-999999px";
+        textArea.style.top = "-999999px";
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        
+        try {
+            // Intentar copiar con el método antiguo
+            const successful = document.execCommand('copy');
+            if (successful) {
+                showCopySuccess();
+            } else {
+                showCopyManual(text);
+            }
+        } catch (err) {
+            showCopyManual(text);
+        } finally {
+            // Limpiar
+            document.body.removeChild(textArea);
+        }
+    }
+    
+    function showCopySuccess() {
+        const button = event.currentTarget;
+        const originalHTML = button.innerHTML;
+        button.innerHTML = '<i class="fas fa-check"></i> ¡Código Copiado!';
+        button.style.background = 'linear-gradient(90deg, #80ffdb, #4ea8de)';
+        
+        // Efecto de confeti opcional
+        if (typeof confetti === 'function') {
+            confetti({
+                particleCount: 50,
+                spread: 70,
+                origin: { y: 0.6 }
             });
         }
+        
+        setTimeout(() => {
+            button.innerHTML = originalHTML;
+            button.style.background = '';
+        }, 2000);
+    }
+    
+    function showCopyManual(text) {
+        // Mostrar el código en un prompt para copiar manualmente
+        const manualCopy = confirm(
+            "Para copiar el código:\n\n" +
+            "1. Haz clic en Aceptar\n" +
+            "2. El código se mostrará abajo\n" +
+            "3. Selecciona y copia (Ctrl+C)\n\n" +
+            "¿Continuar?"
+        );
+        
+        if (manualCopy) {
+            // Seleccionar automáticamente el código en pantalla
+            const codeElement = document.getElementById('riotCode');
+            codeElement.style.backgroundColor = '#ff6bcb';
+            codeElement.style.color = '#000';
+            
+            // Crear un rango de selección
+            const range = document.createRange();
+            range.selectNodeContents(codeElement);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            
+            alert("Código seleccionado. Ahora presiona Ctrl+C para copiar.");
+            
+            // Restaurar colores después de 3 segundos
+            setTimeout(() => {
+                codeElement.style.backgroundColor = '';
+                codeElement.style.color = '#80ffdb';
+            }, 3000);
+        }
+    }
         
         document.addEventListener('DOMContentLoaded', function() {
             const heart = document.querySelector('.heart');
